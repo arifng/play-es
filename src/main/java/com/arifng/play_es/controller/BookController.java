@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.List;
 
-@RestController("/api")
+@RestController
 @RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
@@ -19,17 +19,17 @@ public class BookController {
         return "HelloW";
     }
 
-    @PostMapping("/book")
+    @PostMapping("/books")
     public Book save(@RequestBody BookForm bookForm) {
         return bookService.save(bookForm.toBook());
     }
 
-    @GetMapping("/book/{id}")
+    @GetMapping("/books/{id}")
     public Book findById(@PathVariable String id) {
         return bookService.findById(id);
     }
 
-    @GetMapping("/book")
+    @GetMapping("/books")
     public List<Book> findByTitle(@RequestParam(required = false) String title) {
         if (title != null) {
             return bookService.findByTitle(title);
