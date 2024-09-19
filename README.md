@@ -5,7 +5,7 @@
 2. Run the code
 ```./mvnw spring-boot:run```
 
-### 
+### Tools
 1. Java 17
 2. Maven 3.6
 
