@@ -1,9 +1,16 @@
 ## Play with the code
 ### Run
 1. Run Elasticsearch docker image
-```docker run -d --name elasticsearch -p 9200:9200 -e "discovery.type=single-node" elasticsearch:7.6.2```
+```
+docker network create elasticsearch
+docker run -d --name elasticsearch --net elasticsearch -p 9200:9200 -e "discovery.type=single-node" elasticsearch:7.6.2
+[optional] docker run -d --name kibana --net elasticsearch -p 5601:5601 kibana:7.6.2
+```
+Elasticsearch will be available at `http://localhost:9200` and [Optional] Kibana will be available at `http://localhost:5601`
 2. Run the code
-```./mvnw spring-boot:run```
+```
+./mvnw spring-boot:run
+```
 
 ### Tools
 1. Java 17
