@@ -4,6 +4,8 @@ import com.arifng.play_es.document.Book;
 import com.arifng.play_es.repository.BookRepository;
 import com.arifng.play_es.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,7 +27,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> findByTitle(String title) {
-        return bookRepository.findByTitle(title);
+    public List<Book> searchByTitle(String title) {
+        return bookRepository.searchByTitle(title);
+    }
+
+    @Override
+    public Page<Book> findAll(Pageable pageable) {
+        return bookRepository.findAll(pageable);
     }
 }

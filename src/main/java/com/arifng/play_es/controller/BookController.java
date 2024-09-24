@@ -4,6 +4,8 @@ import com.arifng.play_es.document.Book;
 import com.arifng.play_es.form.BookForm;
 import com.arifng.play_es.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -30,9 +32,14 @@ public class BookController {
     }
 
     @GetMapping("/books")
-    public List<Book> findByTitle(@RequestParam(required = false) String title) {
+    public Page<Book> findAll(Pageable pageable) {
+        return bookService.findAll(pageable);
+    }
+
+    @GetMapping("/books/search")
+    public List<Book> search(@RequestParam(required = false) String title) {
         if (title != null) {
-            return bookService.findByTitle(title);
+            return bookService.searchByTitle(title);
         }
         return Collections.emptyList();
     }

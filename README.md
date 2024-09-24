@@ -1,12 +1,13 @@
 ## Play with the code
 ### Run
-1. Run Elasticsearch docker image
+1. Run Elasticsearch docker image using commands
 ```
 docker network create elasticsearch
 docker run -d --name elasticsearch --net elasticsearch -p 9200:9200 -e "discovery.type=single-node" elasticsearch:7.6.2
-[optional] docker run -d --name kibana --net elasticsearch -p 5601:5601 kibana:7.6.2
+docker run -d --name kibana --net elasticsearch -p 5601:5601 kibana:7.6.2
 ```
 Elasticsearch will be available at `http://localhost:9200` and [Optional] Kibana will be available at `http://localhost:5601`
+
 2. Run the code
 ```
 ./mvnw spring-boot:run
@@ -18,8 +19,18 @@ Elasticsearch will be available at `http://localhost:9200` and [Optional] Kibana
 
 ### Test
 1. Create index
-```curl -X POST -H "Content-Type: application/json" -d '{"title": "Dreams 2", "authors": ["Robin", "John"], "releaseDate": "2024-09-19"}' http://localhost:8080/books"```
+```
+curl -X POST -H "Content-Type: application/json" -d '{"title": "Dreams 2", "authors": ["Robin", "John"], "releaseDate": "2024-09-19"}' http://localhost:8080/books
+```
 2. Get by id
-```curl -X GET -H "Content-Type: application/json" http://localhost:8080/books/{id}```
-3. Search by title
-```curl -X GET -H "Content-Type: application/json" http://localhost:8080/books/search?title={title}```
+```
+curl -X GET -H "Content-Type: application/json" http://localhost:8080/books/{id}
+```
+3. Get all by page
+```
+curl -X GET -H "Content-Type: application/json" "http://localhost:8080/books?page=0&size=1"
+```
+4. Search by title
+```
+curl -X GET -H "Content-Type: application/json" http://localhost:8080/books/search?title={title}
+```
